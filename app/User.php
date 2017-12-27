@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'dni', 'apellido_p', 'apellido_m', 'nombres', 'email', 'password', 'tipo', 'habilitado'
     ];
 
     /**
@@ -26,4 +26,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $primaryKey = 'dni';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    public function nombreCompleto()
+    {
+        return $this->apellido_p.' '.$this->apellido_m.' '.$this->nombres;
+    }
+
+    public function proformas()
+    {
+        return $this->hasMany(Proforma::class);
+    }
 }
