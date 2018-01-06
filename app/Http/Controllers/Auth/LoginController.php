@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -36,4 +36,33 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function login()
+    {
+        return view('users.login');
+    }
+
+    public function store()
+    {
+        $this->validate(request(), [
+            'dni' => 'required',
+            'password' => 'required'
+        ]);
+
+        if (! auth()->attempt(request(['dni', 'password'])) ) {
+            return back()->withErrors([
+                'message' => 'DNI o contraseña incorrecta.'
+            ]);
+        }
+
+        return redirect()->home();
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+
+        return redirect('login');
+    }
+
 }

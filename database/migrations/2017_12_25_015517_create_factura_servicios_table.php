@@ -16,8 +16,9 @@ class CreateFacturaServiciosTable extends Migration
         Schema::create('factura_servicios', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('servicio_id');
+            $table->integer('dni_u');
             $table->date('fecha');
-            $table->boolean('anulado');
+            $table->boolean('anulado')->default(false);
             $table->timestamps();
         });
     }

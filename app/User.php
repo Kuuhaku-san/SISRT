@@ -36,8 +36,26 @@ class User extends Authenticatable
         return $this->apellido_p.' '.$this->apellido_m.' '.$this->nombres;
     }
 
+    public function tipo()
+    {
+        if ($this->tipo == 'A') {
+            return 'Administrador';
+        }
+        elseif ($this->tipo == 'T') {
+            return 'Técnico';
+        }
+        else {
+            return 'Secretaria';
+        }
+    }
+
     public function proformas()
     {
         return $this->hasMany(Proforma::class);
+    }
+
+    public function facturas()
+    {
+        return $this->hasMany(FacturaServicio::class, 'dni_u');
     }
 }

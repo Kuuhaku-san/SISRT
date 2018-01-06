@@ -40,18 +40,31 @@
             </td>
             <td>
                 @include('layouts.dropdown')
-                        <a href="/proveedores/consultar/{{$proveedor->ruc}}" class="dropdown-item">
-                            Consultar en SUNAT
+                    <a href="/proveedores/consultar/{{$proveedor->ruc}}" class="dropdown-item">
+                        Consultar en SUNAT
+                    </a>
+                    <a href="/proveedores/{{ $proveedor->ruc }}" class="dropdown-item">
+                        Mostrar
+                    </a>
+                    @if ($proveedor->habilitado)
+                        <a href="/proveedores/{{ $proveedor->ruc }}/deshabilitar" class="dropdown-item">
+                            Deshabilitar
                         </a>
-                        <a href="/proveedores/{{ $proveedor->ruc }}/edit" class="dropdown-item">
-                            Modificar
+                    @else
+                        <a href="/proveedores/{{ $proveedor->ruc }}/habilitar" class="dropdown-item">
+                            Habilitar
                         </a>
-                        <a href="/proveedores/{{ $proveedor->ruc }}/eliminar" class="dropdown-item">
-                            Eliminar
-                        </a>
+                    @endif
                     </div>
                 </div>
             </td>
         </tr>
     @endforeach
+@endsection
+
+@section('footer')
+    <script>
+        var link = document.getElementById('nav_proveedores');
+        link.setAttribute('class', 'nav-link active');
+    </script>
 @endsection

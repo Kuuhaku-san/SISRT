@@ -15,7 +15,7 @@ class CreatePiezasTable extends Migration
     {
         Schema::create('piezas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('nombre')->unique();
             $table->timestamps();
         });
     }

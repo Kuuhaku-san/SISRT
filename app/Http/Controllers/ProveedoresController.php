@@ -54,4 +54,25 @@ class ProveedoresController extends Controller
 
         return redirect('/proveedores');
     }
+
+    public function habilitar(Proveedor $proveedor)
+    {
+        $proveedor->habilitado = true;
+        $proveedor->save();
+
+        return redirect()->back();
+    }
+
+    public function deshabilitar(Proveedor $proveedor)
+    {
+        $proveedor->habilitado = false;
+        $proveedor->save();
+
+        return redirect()->back();
+    }
+
+    public function buscar(Proveedor $proveedor)
+    {
+        return view('proveedores.buscar', compact('proveedor'));
+    }
 }

@@ -13,3 +13,10 @@
         </ul>
     </div>
 @endsection
+
+@section('footer')
+    <script>
+        var link = document.getElementById('nav_proveedores');
+        link.setAttribute('class', 'nav-link active');
+    </script>
+@endsection

@@ -15,8 +15,9 @@ class CreateServiciosTable extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo_p');
+            $table->string('codigo_p')->unique();
             $table->boolean('terminado')->default(false);
+            $table->boolean('eliminado')->default(false);
             $table->timestamps();
         });
     }

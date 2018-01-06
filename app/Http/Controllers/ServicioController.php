@@ -10,7 +10,14 @@ class ServicioController extends Controller
 {
     public function index()
     {
-        return view('servicios.index');
+        $servicios = Servicio::all();
+
+        return view('servicios.index', compact('servicios'));
+    }
+
+    public function show(Servicio $servicio)
+    {
+        return view('servicios.show', compact('servicio'));
     }
 
     public function create(Proforma $proforma)
@@ -24,9 +31,20 @@ class ServicioController extends Controller
 
         ]);
 
+        $terminado = null !== request('terminado');
+
         $proforma->servicio()->create([
-            'terminado' => request('terminado')
+            'terminado' => $terminado
         ]);
-        return view('servicios.index');
+
+        return redirect('/servicios');
+    }
+
+    public function destroy(Servicio $servicio)
+    {
+        $servicio->eliminado = true;
+        $servicio->save();
+
+        return redirect()->back();
     }
 }

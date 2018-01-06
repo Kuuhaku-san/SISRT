@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <div class="col-sm-8 blog-main">
+    <div class="col-sm-8">
         <h2>Registrar cliente</h2>
         <hr>
         <form action="/clientes" method="post">
@@ -33,4 +33,11 @@
             @include('layouts.errors')
         </form>
     </div>
+@endsection
+
+@section('footer')
+    <script>
+        var link = document.getElementById('nav_clientes');
+        link.setAttribute('class', 'nav-link active');
+    </script>
 @endsection

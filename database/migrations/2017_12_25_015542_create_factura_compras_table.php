@@ -18,6 +18,7 @@ class CreateFacturaComprasTable extends Migration
             $table->integer('servicio_id');
             $table->string('ruc_p', 11);
             $table->date('fecha');
+            $table->boolean('eliminado')->default(false);
             $table->timestamps();
         });
     }

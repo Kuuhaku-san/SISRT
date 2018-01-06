@@ -19,7 +19,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Ajustes</a>
+                            <a class="dropdown-item" href="/user/ajustes">Ajustes</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout">Cerrar sesión</a>
                         </div>

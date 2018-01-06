@@ -1,7 +1,11 @@
 @extends('layouts.master')
 
+@section('titulo')
+    Registrar Proveedor
+@endsection
+
 @section('contenido')
-    <div class="col-sm-8 blog-main">
+    <div class="col-sm-8">
         <h2>Registrar proveedor</h2>
         <hr>
 
@@ -45,4 +49,11 @@
             @include('layouts.errors')
         </form>
     </div>
+@endsection
+
+@section('footer')
+    <script>
+        var link = document.getElementById('nav_proveedores');
+        link.setAttribute('class', 'nav-link active');
+    </script>
 @endsection

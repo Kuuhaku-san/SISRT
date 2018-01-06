@@ -36,10 +36,17 @@
             </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group text-center">
             <button type="submit" class="btn btn-success">Guardar</button>
         </div>
 
         @include('layouts.errors')
     </form>
+@endsection
+
+@section('footer')
+    <script>
+        var link = document.getElementById('nav_servicios');
+        link.setAttribute('class', 'nav-link active');
+    </script>
 @endsection

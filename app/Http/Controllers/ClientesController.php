@@ -19,6 +19,11 @@ class ClientesController extends Controller
         return view('clientes.index', compact('clientes'));
     }
 
+    public function show(Cliente $cliente)
+    {
+        return view('clientes.show', compact('cliente'));
+    }
+
     public function create()
     {
         return view('clientes.create');
@@ -35,5 +40,26 @@ class ClientesController extends Controller
         Cliente::create(request(['ruc', 'razon_social', 'direccion']));
 
         return redirect('clientes');
+    }
+
+    public function deshabilitar(Cliente $cliente)
+    {
+        $cliente->habilitado = false;
+        $cliente->save();
+
+        return redirect()->back();
+    }
+
+    public function habilitar(Cliente $cliente)
+    {
+        $cliente->habilitado = true;
+        $cliente->save();
+
+        return redirect()->back();
+    }
+
+    public function buscar(Cliente $cliente)
+    {
+        return view('clientes.buscar', compact('cliente'));
     }
 }

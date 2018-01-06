@@ -39,8 +39,8 @@
                     <a href="/proformas/{{ $proforma->codigo }}/servicio" class="dropdown-item">
                         Generar servicio
                     </a>
-                    <a href="/proformas/{{ $proforma->codigo }}/" class="dropdown-item">
-                        Editar
+                    <a href="/proformas/{{ $proforma->codigo }}" class="dropdown-item">
+                        Mostrar
                     </a>
                     <a href="/proformas/{{ $proforma->codigo }}/eliminar" class="dropdown-item">
                         Eliminar
@@ -51,4 +51,11 @@
     @endforeach
 </tbody>
 </table>
+@endsection
+
+@section('footer')
+    <script>
+        var link = document.getElementById('nav_proformas');
+        link.setAttribute('class', 'nav-link active');
+    </script>
 @endsection

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('apellido_p');
             $table->string('apellido_m');
             $table->string('nombres');
-            $table->string('tipo');
+            $table->enum('tipo', ['A', 'T', 'S']);
             $table->boolean('habilitado')->default(true);
             $table->rememberToken();
             $table->timestamps();
