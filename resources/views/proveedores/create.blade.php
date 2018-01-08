@@ -42,8 +42,8 @@
                 <input type="text" class="form-control" id="rubro" name="rubro">
             </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-success">Guardar</button>
             </div>
 
             @include('layouts.errors')

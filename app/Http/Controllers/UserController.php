@@ -54,6 +54,28 @@ class UserController extends Controller
         return redirect('/users');
     }
 
+    public function update(User $user)
+    {
+        $this->validate(request(), [
+            'email' => 'required',
+            'apellido_p' => 'required',
+            'apellido_m' => 'required',
+            'nombres' => 'required',
+            'tipo' => 'required'
+        ]);
+
+        $user->fill([
+            'email' => request('email'),
+            'apellido_p' => request('apellido_p'),
+            'apellido_m' => request('apellido_m'),
+            'nombres' => request('nombres'),
+            'tipo' => request('tipo')
+        ]);
+        $user->save();
+
+        return redirect('/users');
+    }
+
     public function editar()
     {
         return view('users.ajustes');

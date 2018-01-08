@@ -13,6 +13,7 @@
     <th scope="col">Proforma</th>
     <th scope="col">Cliente</th>
     <th scope="col">Estado</th>
+    <th scope="col">Monto (S/.)</th>
 @endsection
 
 @section('cuerpo')
@@ -22,16 +23,27 @@
             <td>{{ $servicio->codigo_p }}</td>
             <td>{{ $servicio->proforma->cliente->razon_social }}</td>
             <td>{{ $servicio->estado() }}</td>
+            <td>{{ $servicio->monto() }}</td>
             <td>
                 @include('layouts.dropdown')
-                    @if ($servicio->terminado)
+                    @if ($servicio->terminado() and !$servicio->factura())
                         <a href="/servicios/{{$servicio->id}}/factura" class="dropdown-item">
                             Generar factura
                         </a>
+                    @elseif ($servicio->factura())
+                        <a href="/facturas/{{$servicio->factura()->id}}" class="dropdown-item">
+                            Ver factura
+                        </a>
                     @endif
-                    <a href="/servicios/{{$servicio->id}}/compra" class="dropdown-item">
-                        Registrar compra
-                    </a>
+                    @if ($compra = $servicio->factura_compra)
+                        <a href="/compras/{{$compra->id}}" class="dropdown-item">
+                            Ver compra
+                        </a>
+                    @else
+                        <a href="/servicios/{{$servicio->id}}/compra" class="dropdown-item">
+                            Registrar compra
+                        </a>
+                    @endif
                     <a href="/servicios/{{$servicio->id}}" class="dropdown-item">
                         Mostrar
                     </a>

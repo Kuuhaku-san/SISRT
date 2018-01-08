@@ -3,9 +3,21 @@
 namespace App;
 
 
-
 class FacturaCompra extends Model
 {
+    public static function monto_total($año, $mes)
+    {
+        $monto = 0;
+
+        $compras = self::whereRaw("year(fecha)='$año' and month(fecha)='$mes' and not eliminado")->get();
+
+        foreach ($compras as $compra) {
+            $monto += $compra->total();
+        }
+
+        return $monto;
+    }
+
     public function servicio()
     {
         return $this->belongsTo(Servicio::class);
@@ -18,6 +30,6 @@ class FacturaCompra extends Model
 
     public function total()
     {
-        return 100;
+        return $this->servicio->proforma->monto_piezas();
     }
 }

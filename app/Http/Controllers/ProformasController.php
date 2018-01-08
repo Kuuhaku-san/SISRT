@@ -22,13 +22,18 @@ class ProformasController extends Controller
 
     public function create()
     {
-        $codigo_gen = Proforma::selectRaw("concat(repeat('0',7-length(max(substr(codigo, 1, 7))+1)),max(substr(codigo, 1, 7))+1,'-',2018) cod_gen")
-                                ->whereRaw('year(fecha) = 2018')
+        return view('proformas.create', compact('codigo_gen'));
+    }
+
+    public function generar($year)
+    {
+        $codigo_gen = Proforma::selectRaw("concat(repeat('0',7-length(max(substr(codigo, 1, 7))+1)),max(substr(codigo, 1, 7))+1,'-',$year) cod_gen")
+                                ->whereRaw('year(fecha) = '.$year)
                                 ->first()
                                 ->cod_gen;
-        $codigo_gen = $codigo_gen ? $codigo_gen : '0000001-2018';
+        $codigo_gen = $codigo_gen ? $codigo_gen : '0000001-'.$year;
 
-        return view('proformas.create', compact('codigo_gen'));
+        return '{"codigo" : "'.$codigo_gen.'"}';
     }
 
     public function show(Proforma $proforma)
@@ -81,6 +86,49 @@ class ProformasController extends Controller
 
         }
         // dd($proforma);
+        return redirect('/proformas');
+    }
+
+    public function update(Proforma $proforma) {
+        $this->validate(request(), [
+            'fecha' => 'required|date',
+            'mano_de_obra' => 'required',
+        ]);
+
+        if ($cliente = Cliente::find(request('ruc_c'))) {
+            $cliente->razon_social = request('razon_social');
+            $cliente->direccion = request('direccion');
+            $cliente->save();
+        }
+        else {
+            Cliente::create([
+                'ruc' => request('ruc_c'),
+                'razon_social' => request('razon_social'),
+                'direccion' => request('direccion')
+            ]);
+        }
+
+        $proforma->fill([
+            'fecha' => request('fecha'),
+            'mano_de_obra' => request('mano_de_obra'),
+            'precio_mano_obra' => request('precio_mano_obra'),
+            'tipo' => request('tipo'),
+            'ruc_c' => request('ruc_c')
+        ]);
+        $proforma->save();
+
+        foreach (request('nombre_pieza') as $i => $nombre) {
+            if (! $pieza = Pieza::where('nombre', '=', $nombre)->first()) {
+                $pieza = Pieza::create(['nombre' => $nombre]);
+            }
+            $piezas[$pieza->id] = [
+                'cantidad' => request('cantidad')[$i],
+                'precio' => request('precio')[$i]
+            ];
+        }
+
+        $proforma->piezas()->sync($piezas);
+
         return redirect('/proformas');
     }
 

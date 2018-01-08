@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('titulo')
-    Registrar factura de compra
+    Modificar factura de compra
 @endsection
 
 @section('contenido')
@@ -9,10 +9,11 @@
     <hr>
 
     <form action="/compras/{{$compra->id}}" method="post">
+        {{ method_field('PATCH')}}
         {{ csrf_field() }}
 
         <div class="form-group row">
-            <label class="col-sm-3" for="servicio">Servicio</label>
+            <label class="col-sm-3" for="servicio">Servicio N°</label>
             <input type="text" class="col form-control" id="servicio" name="servicio" value="{{ $compra->servicio->id }}" readonly>
         </div>
 
@@ -21,8 +22,7 @@
             <input type="date" class="col form-control" id="fecha" name="fecha" required value="{{ $compra->fecha }}">
         </div>
 
-        <h4>Datos del proveedor</h4>
-        <hr>
+        <h4>Proveedor</h4><hr>
         <div class="form-group row">
             <label class="col-sm-3" for="ruc_p">RUC</label>
             <input type="text" class="col form-control" id="ruc_p" name="ruc_p" required maxlength="11" value="{{ $compra->proveedor->ruc }}">
@@ -59,22 +59,43 @@
             <div class="col-1"></div>
             <div class="col">
                 <table class="table">
-                    <tbody id="tablaPiezas">
-                        <tr class="row">
-                            <th class="col-2">Cantidad</th>
-                            <th class="col">Pieza</th>
-                            <th class="col-2">Precio unitario</th>
-                            <th class="col-2">Precio total</th>
-                        </tr>
+                    <tr class="row">
+                        <th class="col-2">Cantidad</th>
+                        <th class="col">Descripción</th>
+                        <th class="col-3">Precio unitario (S/.)</th>
+                        <th class="col-2">Precio total (S/.)</th>
+                    </tr>
+                    <tbody>
                         @foreach ($compra->servicio->proforma->piezas as $pieza)
-                            <tr>
-                                <td class="col-2"></td>
-                                <td class="col">{{ $pieza->nombre }}</td>
-                                <td class="col-2"></td>
-                                <td class="col-2"></td>
+                            <tr class="row item">
+                                <td class="col-2">
+                                    {{$pieza->pivot->cantidad}}
+                                </td>
+                                <td class="col">
+                                    {{$pieza->nombre}}
+                                </td>
+                                <td class="col-3">
+                                    {{$pieza->pivot->precio}}
+                                </td>
+                                @php
+                                $total = $pieza->pivot->cantidad * $pieza->pivot->precio;
+                                @endphp
+                                <td class="col-2">
+                                    {{$total}}
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
+                    <tr class="row">
+                        <td class="col-2"></td>
+                        <td class="col"></td>
+                        <th scope="row" class="col-3">
+                            <label for="subtotal">Subtotal (S/.)</label>
+                        </th>
+                        <td class="col-2">
+                            {{$compra->total()}}
+                        </td>
+                    </tr>
                 </table>
             </div>
             <div class="col-1"></div>

@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group text-center">
                 <button type="submit" class="btn btn-success">Guardar</button>
             </div>
 

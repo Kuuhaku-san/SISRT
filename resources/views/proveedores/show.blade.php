@@ -9,7 +9,8 @@
         <hr>
         <div class="col-sm-8">
 
-        <form method="POST" action="/proveedores">
+        <form method="POST" action="/proveedores/{{ $proveedor->ruc }}">
+            {{ method_field('PATCH') }}
             {{ csrf_field() }}
 
             <div class="form-group">

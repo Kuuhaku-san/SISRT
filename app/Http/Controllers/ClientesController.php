@@ -34,10 +34,21 @@ class ClientesController extends Controller
         $this->validate(request(), [
             'ruc' => 'required|max:11',
             'razon_social' => 'required',
-
         ]);
 
         Cliente::create(request(['ruc', 'razon_social', 'direccion']));
+
+        return redirect('clientes');
+    }
+
+    public function update(Cliente $cliente)
+    {
+        $this->validate(request(), [
+            'razon_social' => 'required',
+        ]);
+
+        $cliente->fill(request(['razon_social', 'direccion']));
+        $cliente->save();
 
         return redirect('clientes');
     }

@@ -2,13 +2,29 @@
 
 namespace App;
 
-
-
 class FacturaServicio extends Model
 {
+    public static function monto_total($año, $mes)
+    {
+        $monto = 0;
+
+        $facturas = self::whereRaw("year(fecha)='$año' and month(fecha)='$mes' and not anulado")->get();
+
+        foreach ($facturas as $factura) {
+            $monto += $factura->total();
+        }
+
+        return $monto;
+    }
+
     public function total()
     {
-        return 100;
+        return $this->servicio->monto();
+    }
+
+    public function cliente()
+    {
+        return $this->servicio->proforma->cliente();
     }
 
     public function anular()

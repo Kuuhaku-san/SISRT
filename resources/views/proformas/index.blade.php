@@ -13,7 +13,7 @@
     <th scope="col">Fecha</th>
     <th scope="col">Cliente</th>
     <th scope="col">Tipo</th>
-    <th scope="col">Precio</th>
+    <th scope="col">Monto (S/.)</th>
 @endsection
 
 @section('cuerpo')
@@ -23,7 +23,7 @@
                 {{ $proforma->codigo }}
             </th>
             <td>
-                {{ $proforma->fecha }}
+                {{ (new Carbon\Carbon($proforma->fecha))->format('d/m/Y') }}
             </td>
             <td>
                 {{ $proforma->cliente->razon_social }}
@@ -32,13 +32,19 @@
                 {{ $proforma->tipo() }}
             </td>
             <td>
-                {{ $proforma->precio_mano_obra }}
+                {{ $proforma->monto_total() }}
             </td>
             <td>
                 @include('layouts.dropdown')
-                    <a href="/proformas/{{ $proforma->codigo }}/servicio" class="dropdown-item">
-                        Generar servicio
-                    </a>
+                    @if ($servicio = $proforma->servicio)
+                        <a href="/servicios/{{ $servicio->id }}" class="dropdown-item">
+                            Ver servicio
+                        </a>
+                    @else
+                        <a href="/proformas/{{ $proforma->codigo }}/servicio" class="dropdown-item">
+                            Generar servicio
+                        </a>
+                    @endif
                     <a href="/proformas/{{ $proforma->codigo }}" class="dropdown-item">
                         Mostrar
                     </a>

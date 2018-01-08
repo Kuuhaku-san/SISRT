@@ -2,13 +2,39 @@
 
 namespace App;
 
-
-
 class Servicio extends Model
 {
     public function estado()
     {
-        return ($this->terminado) ? 'Terminado' : 'Pendiente';
+        if ($this->estado == 'P') {
+            return 'Pendiente';
+        } elseif ($this->estado == 'O') {
+            return 'Observado';
+        } else {
+            return 'Terminado';
+        }
+    }
+
+    public function cliente()
+    {
+        return $this->proforma->cliente();
+    }
+
+    public function terminado()
+    {
+        return $this->estado == 'T';
+    }
+
+    public function monto()
+    {
+        return $this->proforma->monto_total();
+    }
+
+    public function factura()
+    {
+        return $this->factura_servicio()
+                    ->where('anulado', 0)
+                    ->first();
     }
 
     public function proforma()

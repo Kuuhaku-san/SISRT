@@ -39,6 +39,20 @@ class FacturaServicioController extends Controller
         return redirect('/facturas');
     }
 
+    public function update(FacturaServicio $factura)
+    {
+        $this->validate(request(), [
+            'fecha' => 'required'
+        ]);
+
+        $factura->fill([
+            'fecha' => request('fecha')
+        ]);
+        $factura->save();
+
+        return redirect('/facturas');
+    }
+
     public function anular(FacturaServicio $factura)
     {
         $factura->anular();

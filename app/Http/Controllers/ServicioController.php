@@ -8,6 +8,11 @@ use App\Servicio;
 
 class ServicioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $servicios = Servicio::all();
@@ -28,14 +33,28 @@ class ServicioController extends Controller
     public function store(Proforma $proforma)
     {
         $this->validate(request(), [
-
+            'fecha' => 'required|date'
         ]);
-
-        $terminado = null !== request('terminado');
 
         $proforma->servicio()->create([
-            'terminado' => $terminado
+            'estado' => request('estado'),
+            'fecha' => request('fecha')
         ]);
+
+        return redirect('/servicios');
+    }
+
+    public function update(Servicio $servicio)
+    {
+        $this->validate(request(), [
+            'fecha' => 'required|date'
+        ]);
+
+        $servicio->fill([
+            'estado' => request('estado'),
+            'fecha' => request('fecha')
+        ]);
+        $servicio->save();
 
         return redirect('/servicios');
     }

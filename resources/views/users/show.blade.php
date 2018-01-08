@@ -8,7 +8,8 @@
     <h3>Usuario {{ $user->dni }}</h3>
     <hr>
     <div class="col-sm-8">
-        <form action="/users" method="post">
+        <form action="/users/{{ $user->dni }}" method="post">
+            {{ method_field('PATCH') }}
             {{ csrf_field() }}
 
             <div class="form-row">

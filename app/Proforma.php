@@ -18,6 +18,20 @@ class Proforma extends Model
             return 'Reparación';
     }
 
+    public function monto_piezas()
+    {
+        $total_piezas = 0;
+        foreach ($this->piezas as $pieza) {
+            $total_piezas += $pieza->pivot->cantidad * $pieza->pivot->precio;
+        }
+        return $total_piezas;
+    }
+
+    public function monto_total()
+    {
+        return $this->monto_piezas() + $this->precio_mano_obra;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'dni_u', 'dni');

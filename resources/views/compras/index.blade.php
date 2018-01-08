@@ -20,7 +20,7 @@
     @foreach ($compras as $compra)
         <tr>
             <th scope="row">{{ $compra->id }}</th>
-            <td>{{ $compra->fecha }}</td>
+            <td>{{ (new Carbon\Carbon($compra->fecha))->format('d/m/Y') }}</td>
             <td>{{ $compra->servicio->id }}</td>
             <td>{{ $compra->proveedor->razon_social }}</td>
             <td>{{ $compra->total() }}</td>

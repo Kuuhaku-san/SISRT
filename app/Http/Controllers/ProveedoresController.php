@@ -55,6 +55,24 @@ class ProveedoresController extends Controller
         return redirect('/proveedores');
     }
 
+    public function update(Proveedor $proveedor)
+    {
+        $this->validate(request(),[
+            'razon_social' => 'required'
+        ]);
+
+        $proveedor->fill(request([
+            'razon_social',
+            'direccion',
+            'telefono',
+            'numero_cuenta',
+            'rubro'
+        ]));
+        $proveedor->save();
+
+        return redirect('/proveedores');
+    }
+
     public function habilitar(Proveedor $proveedor)
     {
         $proveedor->habilitado = true;

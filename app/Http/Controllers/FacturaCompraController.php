@@ -65,6 +65,41 @@ class FacturaCompraController extends Controller
         return redirect('compras');
     }
 
+    public function update(FacturaCompra $compra)
+    {
+        $this->validate(request(), [
+            'ruc_p' => 'required|max:11',
+            'fecha' => 'date|required'
+        ]);
+
+        if ($proveedor = Proveedor::find(request('ruc_p'))) {
+            $proveedor->razon_social = request('razon_social');
+            $proveedor->direccion = request('direccion');
+            $proveedor->telefono = request('telefono');
+            $proveedor->numero_cuenta = request('numero_cuenta');
+            $proveedor->rubro = request('rubro');
+            $proveedor->save();
+        }
+        else {
+            Proveedor::create([
+                'ruc' => request('ruc_p'),
+                'razon_social' => request('razon_social'),
+                'direccion' => request('direccion'),
+                'telefono' => request('direccion'),
+                'numero_cuenta' => request('numero_cuenta'),
+                'rubro' => request('rubro'),
+            ]);
+        }
+
+        $compra->fill([
+            'ruc_p' => request('ruc_p'),
+            'fecha' => request('fecha')
+        ]);
+        $compra->save();
+
+        return redirect('compras');
+    }
+
     public function destroy(FacturaCompra $compra)
     {
         $compra->eliminado = true;
