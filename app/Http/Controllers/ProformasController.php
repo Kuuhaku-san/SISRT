@@ -117,14 +117,17 @@ class ProformasController extends Controller
         ]);
         $proforma->save();
 
-        foreach (request('nombre_pieza') as $i => $nombre) {
-            if (! $pieza = Pieza::where('nombre', '=', $nombre)->first()) {
-                $pieza = Pieza::create(['nombre' => $nombre]);
+        $piezas = [];
+        if (request('nombre_pieza')) {
+            foreach (request('nombre_pieza') as $i => $nombre) {
+                if (! $pieza = Pieza::where('nombre', '=', $nombre)->first()) {
+                    $pieza = Pieza::create(['nombre' => $nombre]);
+                }
+                $piezas[$pieza->id] = [
+                    'cantidad' => request('cantidad')[$i],
+                    'precio' => request('precio')[$i]
+                ];
             }
-            $piezas[$pieza->id] = [
-                'cantidad' => request('cantidad')[$i],
-                'precio' => request('precio')[$i]
-            ];
         }
 
         $proforma->piezas()->sync($piezas);
