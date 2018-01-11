@@ -15,10 +15,10 @@ class CreateProformasTable extends Migration
     {
         Schema::create('proformas', function (Blueprint $table) {
             $table->string('codigo', 12);
-            $table->string('ruc_c', 11);
-            $table->string('dni_u', 8);
+            $table->string('ruc_c', 11); // ruc del cliente
+            $table->string('dni_u', 8); // dni del usuario que creo la proforma
             $table->date('fecha');
-            $table->text('mano_de_obra');
+            $table->text('mano_de_obra')->nullable();
             $table->decimal('precio_mano_obra', 8, 2);
             $table->enum('tipo', ['I', 'M', 'R']);
             $table->boolean('eliminado')->default(false);

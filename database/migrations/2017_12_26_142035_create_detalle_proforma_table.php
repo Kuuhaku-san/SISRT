@@ -14,8 +14,8 @@ class CreateDetalleProformaTable extends Migration
     public function up()
     {
         Schema::create('detalle_proforma', function (Blueprint $table) {
-            $table->string('codigo_p');
-            $table->integer('id_p');
+            $table->string('codigo_p'); // codigo de proforma
+            $table->integer('id_p'); // id de pieza
             $table->integer('cantidad');
             $table->decimal('precio', 7, 2);
             $table->timestamps();

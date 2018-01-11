@@ -17,7 +17,12 @@ class PiezasTableSeeder extends Seeder
             ['nombre' => 'Compresor de aire acondicionado'],
             ['nombre' => 'Kg. gas R-134A'],
             ['nombre' => 'Válvula de servicio'],
-            ['nombre' => 'Filtro 20 grs.']
+            ['nombre' => 'Filtro 20 grs.'],
+            ['nombre' => 'Filtro 3/8 roscable'],
+            ['nombre' => 'Ventilador forzado 220v'],
+            ['nombre' => 'Contactor 24v 20A'],
+            ['nombre' => 'Tarjeta electrónica'],
+            ['nombre' => 'Capacitor 3.5 uF']
         ]);
     }
 }
