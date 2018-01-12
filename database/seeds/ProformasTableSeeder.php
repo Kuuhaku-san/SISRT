@@ -107,52 +107,52 @@ class ProformasTableSeeder extends Seeder
 
         DB::table('detalle_proforma')->insert([
             [
-                'codigo' => '0000001-2017',
+                'codigo_p' => '0000001-2017',
                 'id_p' => 11,
                 'cantidad' => 2,
                 'precio' => 35
             ],
             [
-                'codigo' => '0000003-2017',
+                'codigo_p' => '0000003-2017',
                 'id_p' => 10,
                 'cantidad' => 3,
                 'precio' => 150
             ],
              [
-                'codigo' => '0000004-2017',
+                'codigo_p' => '0000004-2017',
                 'id_p' => 1,
                 'cantidad' => 2,
                 'precio' => 85
             ],
                [
-                'codigo' => '0000005-2017',
+                'codigo_p' => '0000005-2017',
                 'id_p' => 5,
                 'cantidad' => 1,
                 'precio' => 125
             ],
              [
-                'codigo' => '0000006-2017',
+                'codigo_p' => '0000006-2017',
                 'id_p' => 2,
                 'cantidad' => 3,
-                'precio' => 100 
+                'precio' => 100
             ],
               [
-                'codigo' => '0000001-2018',
+                'codigo_p' => '0000001-2018',
                 'id_p' => 3,
                 'cantidad' => 5,
-                'precio' => 135 
+                'precio' => 135
             ],
               [
-                'codigo' => '0000002-2018',
+                'codigo_p' => '0000002-2018',
                 'id_p' => 8,
                 'cantidad' => 1,
-                'precio' => 56 
+                'precio' => 56
             ],
               [
-                'codigo' => '0000003-2018',
+                'codigo_p' => '0000003-2018',
                 'id_p' => 4,
                 'cantidad' => 1,
-                'precio' => 125 
+                'precio' => 125
             ]
         ]);
     }

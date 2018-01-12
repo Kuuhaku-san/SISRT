@@ -11,7 +11,7 @@ class ServiciosTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('servicios')-->insert([
+        DB::table('servicios')->insert([
         [
         	'id'          => '1',
         	'codigo_p'    => '0000001-2017',
