@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\FacturaCompra;
 use App\Servicio;
 use App\Proveedor;
+use Carbon\Carbon;
 
 class FacturaCompraController extends Controller
 {
@@ -16,9 +17,16 @@ class FacturaCompraController extends Controller
 
     public function index()
     {
-        $compras = FacturaCompra::all();
+        $inicio = (request('inicio') ? request('inicio') : Carbon::now()->toDateString());
+        $fin = (request('fin') ? request('fin') : Carbon::now()->toDateString());
+        $id = request('id');
+        // dd($inicio);
+        $compras = FacturaCompra::orderBy('fecha', 'desc')
+                                    ->activo()
+                                    ->filtrar(compact('inicio', 'fin', 'id'))
+                                    ->get();
 
-        return view('compras.index', compact('compras'));
+        return view('compras.index', compact('compras', 'inicio', 'fin', 'id'));
     }
 
     public function show(FacturaCompra $compra)

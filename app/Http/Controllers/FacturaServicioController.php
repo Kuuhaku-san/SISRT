@@ -5,14 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\FacturaServicio;
 use App\Servicio;
+use Carbon\Carbon;
 
 class FacturaServicioController extends Controller
 {
     public function index()
     {
-        $facturas = FacturaServicio::all();
+        $inicio = (request('inicio') ? request('inicio') : Carbon::now()->toDateString());
+        $fin = (request('fin') ? request('fin') : Carbon::now()->toDateString());
+        $id = request('id');
+        $anulado = request('anulado');
+        // dd($inicio);
+        $facturas = FacturaServicio::orderBy('fecha', 'desc')
+                                    ->filtrar(compact('inicio', 'fin', 'id', 'anulado'))
+                                    ->get();
 
-        return view('facturas.index', compact('facturas'));
+        return view('facturas.index', compact('facturas','inicio', 'fin', 'id', 'anulado'));
     }
 
     public function show(FacturaServicio $factura)

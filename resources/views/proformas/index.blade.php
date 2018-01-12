@@ -4,8 +4,27 @@
     Proformas
 @endsection
 
-@section('href_nuevo')
-    "/proformas/create"
+@section('opciones')
+    <div class="row mb-3">
+        <div class="col-sm-2">
+            <a class="btn btn-success" href="/proformas/create">Nuevo</a>
+        </div>
+        <div class="col">
+            <form class="form-inline mt-2 mt-md-0" action="/proformas" method="get" autocomplete="off">
+                <input class="form-control mr-sm-2" type="text" placeholder="Código" name="codigo">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="col-6">
+            <form class="form-inline mt-2 mt-md-0" action="/proformas" method="get">
+                <label class="mr-2" for="inicio">Desde</label>
+                <input class="form-control mr-3" type="date" name="inicio" value="{{$inicio}}">
+                <label class="mr-2" for="fin">Hasta</label>
+                <input class="form-control mr-2" type="date" name="fin" value="{{$fin}}">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
 @endsection
 
 @section('cabeceras')
@@ -32,7 +51,7 @@
                 {{ $proforma->tipo() }}
             </td>
             <td>
-                {{ $proforma->monto_total() }}
+                {{ number_format($proforma->monto_total(), 2) }}
             </td>
             <td>
                 @include('layouts.dropdown')

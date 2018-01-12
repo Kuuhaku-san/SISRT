@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Proforma;
 use App\Servicio;
+use Carbon\Carbon;
 
 class ServicioController extends Controller
 {
@@ -15,9 +16,17 @@ class ServicioController extends Controller
 
     public function index()
     {
-        $servicios = Servicio::all();
+        $inicio = (request('inicio') ? request('inicio') : Carbon::now()->toDateString());
+        $fin = (request('fin') ? request('fin') : Carbon::now()->toDateString());
+        $id = request('id');
+        $estado = request('estado') ? request('estado') : 'A';
 
-        return view('servicios.index', compact('servicios'));
+        $servicios = Servicio::orderBy('fecha', 'desc')
+                    ->activo()
+                    ->filtrar(compact('id', 'inicio', 'fin', 'estado'))
+                    ->get();
+
+        return view('servicios.index', compact('servicios', 'inicio', 'fin', 'estado'));
     }
 
     public function show(Servicio $servicio)

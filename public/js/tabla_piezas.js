@@ -15,6 +15,16 @@ for (var i=0, filas=$('.item'); i < filas.length; i++) {
     fila.find('.btn').on('click', eventoEliminar);
 }
 
+$('#tipo').on('change', function() {
+    if ($('#tipo').val() === 'M') {
+        $('.item').remove();
+        $('#btnNuevaFila').addClass('disabled');
+        $('#subtotal').val(0).change();
+    }
+    else {
+        $('#btnNuevaFila').removeClass('disabled');
+    }
+});
 
 $('#btnNuevaFila').on('click', nuevaFila);
 
@@ -31,6 +41,8 @@ function calcularTotal() {
 }
 
 function nuevaFila() {
+    if ($('#tipo').val() === 'M') return;
+
     var input_total = $('<input>'),
         input_cantidad = $('<input>'),
         input_pieza = $('<input>'),

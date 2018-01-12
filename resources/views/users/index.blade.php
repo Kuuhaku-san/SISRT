@@ -5,7 +5,15 @@
 @endsection
 
 @section('href_nuevo')
-    "/users/create"
+
+@endsection
+
+@section('opciones')
+    <div class="row mb-3">
+        <div class="col-sm-2">
+            <a class="btn btn-success" href="/users/create">Nuevo</a>
+        </div>
+    </div>
 @endsection
 
 @section('cabeceras')

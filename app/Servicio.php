@@ -15,6 +15,19 @@ class Servicio extends Model
         }
     }
 
+    public function scopeFiltrar($query, $filtros)
+    {
+        if ($id = $filtros['id']) {
+            $query->whereRaw("id like '%$id%'");
+        }
+        else {
+            $query->whereBetween('fecha', [$filtros['inicio'], $filtros['fin']]);
+            if ($estado = $filtros['estado'] and $estado !== 'A') {
+                $query->where('estado', $estado);
+            }
+        }
+    }
+
     public function cliente()
     {
         return $this->proforma->cliente();

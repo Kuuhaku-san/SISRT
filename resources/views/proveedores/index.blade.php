@@ -4,8 +4,12 @@
     Proveedores
 @endsection
 
-@section('href_nuevo')
-    "/proveedores/create"
+@section('opciones')
+    <div class="row mb-3">
+        <div class="col-sm-2">
+            <a class="btn btn-success" href="/proveedores/create">Nuevo</a>
+        </div>
+    </div>
 @endsection
 
 @section('cabeceras')

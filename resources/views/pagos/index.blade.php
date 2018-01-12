@@ -11,24 +11,25 @@
         {{ csrf_field() }}
             <label class="col-2" for="mes">Mes</label>
             <select name="mes" id="mes" class="col custom-select" required>
-                <option value="01">Enero</option>
-                <option value="02">Febrero</option>
-                <option value="03">Marzo</option>
-                <option value="04">Abril</option>
-                <option value="05">Mayo</option>
-                <option value="06">Junio</option>
-                <option value="07">Julio</option>
-                <option value="08">Agosto</option>
-                <option value="09">Septiembre</option>
-                <option value="10">Octubre</option>
-                <option value="11">Noviembre</option>
-                <option value="12">Diciembre</option>
+                <option value="1" {{ $mes == 1 ? 'selected' : ''}}>Enero</option>
+                <option value="2" {{ $mes == 2 ? 'selected' : ''}}>Febrero</option>
+                <option value="3" {{ $mes == 3 ? 'selected' : ''}}>Marzo</option>
+                <option value="4" {{ $mes == 4 ? 'selected' : ''}}>Abril</option>
+                <option value="5" {{ $mes == 5 ? 'selected' : ''}}>Mayo</option>
+                <option value="6" {{ $mes == 6 ? 'selected' : ''}}>Junio</option>
+                <option value="7" {{ $mes == 7 ? 'selected' : ''}}>Julio</option>
+                <option value="8" {{ $mes == 8 ? 'selected' : ''}}>Agosto</option>
+                <option value="9" {{ $mes == 9 ? 'selected' : ''}}>Septiembre</option>
+                <option value="10" {{ $mes == 10 ? 'selected' : ''}}>Octubre</option>
+                <option value="11" {{ $mes == 11 ? 'selected' : ''}}>Noviembre</option>
+                <option value="12" {{ $mes == 12 ? 'selected' : ''}}>Diciembre</option>
             </select>
 
             <label class="col-2" for="año">Año</label>
             <select name="año" id="año" class="col custom-select" required>
-                <option value="2017">2017</option>
-                <option value="2016">2016</option>
+                @foreach ($años as $a)
+                    <option value="{{$a->a}}" {{$año == $a->a ? 'selected':''}}>{{$a->a}}</option>
+                @endforeach
             </select>
 
             <div class="col-2 form-group">

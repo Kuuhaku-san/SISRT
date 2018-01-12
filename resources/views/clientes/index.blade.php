@@ -4,8 +4,12 @@
     Clientes
 @endsection
 
-@section('href_nuevo')
-    "/clientes/create"
+@section('opciones')
+    <div class="row mb-3">
+        <div class="col-sm-2">
+            <a class="btn btn-success" href="/clientes/create">Nuevo</a>
+        </div>
+    </div>
 @endsection
 
 @section('cabeceras')

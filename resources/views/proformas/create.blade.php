@@ -44,6 +44,14 @@
         <h4>Piezas</h4>
         <hr>
         <div class="form-group row">
+            <label class="col-sm-3" for="tipo">Tipo de servicio</label>
+            <select name="tipo" id="tipo" class="col custom-select" required>
+                <option value="I">Instalación</option>
+                <option value="M">Mantenimiento</option>
+                <option value="R">Reparación</option>
+            </select>
+        </div>
+        <div class="form-group row">
             <div class="col-1"></div>
             <div class="col">
                 <table class="table">
@@ -57,7 +65,9 @@
                         </tr>
                     </tbody>
                     <tr class="row">
-                        <td class="col-2"><div class="btn btn-success" id="btnNuevaFila">Nuevo</div></td>
+                        <td class="col-2">
+                            <div class="btn btn-success" id="btnNuevaFila">Nuevo</div>
+                        </td>
                         <td class="col"></td>
                         <td class="col-3">
                             <label for="subtotal">Subtotal (S/.)</label>
@@ -74,18 +84,10 @@
 
         <h4>Detalle del servicio</h4>
         <hr>
-        <div class="form-group row">
-            <label class="col-sm-3" for="tipo">Tipo de servicio</label>
-            <select name="tipo" id="tipo" class="col custom-select" required>
-                <option value="I">Instalación</option>
-                <option value="M">Mantenimiento</option>
-                <option value="R">Reparación</option>
-            </select>
-        </div>
 
         <div class="form-group row">
             <label class="col-sm-3" for="mano_de_obra">Mano de obra</label>
-            <textarea class="col form-control" id="mano_de_obra" name="mano_de_obra" required rows="8"></textarea>
+            <textarea class="col form-control" id="mano_de_obra" name="mano_de_obra" rows="8"></textarea>
         </div>
 
         <div class="form-group row">

@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Carbon\Carbon;
 
 class Proforma extends Model
 {
@@ -30,6 +31,16 @@ class Proforma extends Model
     public function monto_total()
     {
         return $this->monto_piezas() + $this->precio_mano_obra;
+    }
+
+    public function scopeFiltrar($query, $filtros)
+    {
+        if ($codigo = $filtros['codigo']) {
+            $query->whereRaw("codigo like '%$codigo%'");
+        }
+        else {
+            $query->whereBetween('fecha', [$filtros['inicio'], $filtros['fin']]);
+        }
     }
 
     public function user()

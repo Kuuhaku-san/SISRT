@@ -27,7 +27,7 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
 
             @include('layouts.errors')

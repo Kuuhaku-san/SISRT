@@ -14,9 +14,10 @@ class ClientesController extends Controller
 
     public function index()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::orderBy('ruc')
+                            ->get();
 
-        return view('clientes.index', compact('clientes'));
+        return view('clientes.index', compact('clientes', 'filtro', 'habilitado'));
     }
 
     public function show(Cliente $cliente)

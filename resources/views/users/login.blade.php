@@ -20,6 +20,13 @@
 
     <div class="container">
 
+        <div class="row">
+            <div class="col text-center"><h1>SISRT</h1></div>
+        </div>
+        <div class="row mb-4">
+            <div class="col text-center"><h2>Sistema de Gestión de Servicio Técnico</h2></div>
+        </div>
+
       <form class="form-signin" action="/login" method="post">
           {{ csrf_field() }}
         <h2 class="form-signin-heading">Inicio de sesión</h2>
@@ -28,7 +35,7 @@
         <input type="text" id="dni" name="dni" class="form-control" placeholder="DNI" required autofocus maxlength="8" value="{{old('dni')}}">
 
         <label for="password" class="sr-only">Contraseña</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required min="8">
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
 

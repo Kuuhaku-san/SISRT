@@ -22,6 +22,19 @@ class FacturaServicio extends Model
         return $this->servicio->monto();
     }
 
+    public function scopeFiltrar($query, $filtros)
+    {
+        if ($id = $filtros['id']) {
+            $query->whereRaw("id like '%$id%'");
+        }
+        else {
+            $query->whereBetween('fecha', [$filtros['inicio'], $filtros['fin']]);
+            if ($anulado = $filtros['anulado'] and $anulado != 2) {
+                $query->where('anulado', $anulado);
+            }
+        }
+    }
+
     public function cliente()
     {
         return $this->servicio->proforma->cliente();

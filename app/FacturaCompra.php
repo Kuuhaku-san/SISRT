@@ -18,6 +18,16 @@ class FacturaCompra extends Model
         return $monto;
     }
 
+    public function scopeFiltrar($query, $filtros)
+    {
+        if ($id = $filtros['id']) {
+            $query->whereRaw("id like '%$id%'");
+        }
+        else {
+            $query->whereBetween('fecha', [$filtros['inicio'], $filtros['fin']]);
+        }
+    }
+
     public function servicio()
     {
         return $this->belongsTo(Servicio::class);
